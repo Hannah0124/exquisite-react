@@ -16,6 +16,7 @@ const Game = () => {
   const lastId = poems.length;
 
 
+  // Wave 1
   const updatePoem = (poem) => {
     const newPoems = [...poems]; 
 
@@ -27,6 +28,7 @@ const Game = () => {
   };
 
 
+  // Wave 3
   const getRecentSubmission = () => {
     const recentPoem = poems[lastId - 1];
     if (recentPoem) {
@@ -34,7 +36,8 @@ const Game = () => {
     };
   };
 
-  
+
+  // Wave 3 (Conditionally Show, Hide)
   const onSubmitLineClick = () => {
     console.log('you just clicked submit line!')
     setReveal({
@@ -44,6 +47,7 @@ const Game = () => {
   };
 
 
+  // Wave 3 (Conditionally Show, Hide)
   const onRevealPoemClick = () => {
     console.log('you just clicked reveal the poem button!');
     setReveal({

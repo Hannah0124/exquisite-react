@@ -14,6 +14,7 @@ const PlayerSubmissionForm = (props) => {
   });
 
 
+  // Wave 1 & optional (a Dynamically-Generated Form)
   const onFieldChange = (event) => {
     console.log("changing poem..", event.target.value)
 
@@ -26,6 +27,7 @@ const PlayerSubmissionForm = (props) => {
   };
 
 
+  // Wave 1 & optional
   const submissionFormComponents = props.fields.map((field, i) => {
     const userInput = poem[field.key];
 
@@ -38,7 +40,7 @@ const PlayerSubmissionForm = (props) => {
           value={userInput} // e.g. user input => "green"
           placeholder={field.placeholder} // e.g. "adjective" 
           type="text" 
-          className={userInput ? '' : 'PlayerSubmissionFormt__input--invalid' }
+          className={userInput ? '' : 'PlayerSubmissionFormt__input--invalid' } // wave 3
         />
       );
     } else {
@@ -47,6 +49,7 @@ const PlayerSubmissionForm = (props) => {
   });
 
 
+  // Wave 1
   const onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -55,8 +58,7 @@ const PlayerSubmissionForm = (props) => {
     
     if (poem.adj1 !== '' && poem.noun1 !== '' && poem.adv !== '' && poem.verb !== '' && poem.adj2 !== '' && poem.noun2 !== '') {
 
-      // we need to display new info
-      props.updatePoemCallback(poem);
+      props.updatePoemCallback(poem); // update 'poem' in 'poems' state (App.js)
 
       setPoem({
         adj1: '',
@@ -68,7 +70,6 @@ const PlayerSubmissionForm = (props) => {
       });
     };
   };
-
 
 
   return (

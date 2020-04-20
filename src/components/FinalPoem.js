@@ -6,6 +6,7 @@ const FinalPoem = (props) => {
 
   console.log('final poem', props.poems)
 
+  // Wave 2
   const FinalPoemComponents = props.poems.map((poem, i) => {
     return (
       <p key={i}>
