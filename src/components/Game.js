@@ -49,7 +49,9 @@ const Game = () => {
         updatePoemCallback={updatePoem}
       />
 
-      <FinalPoem />
+      <FinalPoem 
+        poems={poems}
+      />
 
     </div>
   );
