@@ -6,67 +6,127 @@ const PlayerSubmissionForm = (props) => {
 
   // console.log('fields..', props.fields);
 
-  // test
-  props.fields.forEach(field => {
-    if (typeof field === "object") {
-      // console.log(field.key);
-      // console.log(field.placeholder);
-    }
-  })
-
   const [poem, setPoem] = useState({
-    id: 1,
-    adjective: '',
-    noun: '',
-    adverb: '',
+    adj1: '',
+    noun1: '',
+    adv: '',
     verb: '',
-    adjective2: '',
+    adj2: '',
     noun2: '',
   });
 
-  const onAdjectiveChange = (event) => {
+  // test
+  const filteredFileds = props.fields.filter(filed => {
+    return typeof filed === "object";
+  });
+
+  const onFieldChange = (event) => {
+    const { name, value } = event.target;  // destructuring
+
     console.log("changing poem..", event.target.value)
+    const newPoem = {...poem}; 
 
-    setPoem({
-      ...poem,
-      adjective: event.target.value,
-    });
+    newPoem[name] = value;
+
+    setPoem(newPoem);
   };
 
-  const onNounChange = (event) => {    
-    setPoem({
-      ...poem,
-      noun: event.target.value,
-    });
-  };
+   // test(2)
+   const filteredFormat = props.fields.filter((field, i) => {
+    if (field.key) {
+      return (
+        <input 
+          key={i}
+          onChange={onFieldChange}
+          name={field.key}
+          value={poem[field.key]} // {poem.adjective}
+          placeholder={field.placeholder} // e.g. "adjective" 
+          type="text" 
+          className={poem.adj1 ? '' : 'PlayerSubmissionFormt__input--invalid' }
+        />
+      );
+    } else {
+      return field;
+    }
+  });
 
-  const onAdverbChange = (event) => {    
-    setPoem({
-      ...poem,
-      adverb: event.target.value,
-    });
-  };
+  console.log("!!", filteredFormat)
+  console.log("type!!", typeof filteredFormat)
 
-  const onVerbChange = (event) => {    
-    setPoem({
-      ...poem,
-      verb: event.target.value,
-    });
-  };
+  
 
-  const onAdjective2Change = (event) => {    
-    setPoem({
-      ...poem,
-      adjective2: event.target.value,
-    });
-  };
+  const submissionFormComponents = props.fields.map((field, i) => {
 
-  const onNoun2Change = (event) => {    
-    setPoem({
-      ...poem,
-      noun2: event.target.value,
-    });
-  };
+    console.log('key test', field.key);
+    console.log(field.placeholder);
+
+    if (field.key) {
+      return (
+        <input 
+          key={i}
+          onChange={onFieldChange}
+          name={field.key}
+          value={poem[field.key]} // {poem.adjective}
+          placeholder={field.placeholder} // e.g. "adjective" 
+          type="text" 
+          className={poem.adj1 ? '' : 'PlayerSubmissionFormt__input--invalid' }
+        />
+      );
+    } else {
+      return field;
+    };
+  });
+
+
+    
+
+ 
+
+  
+
+  // const onAdjectiveChange = (event) => {
+  //   console.log("changing poem..", event.target.value)
+
+  //   setPoem({
+  //     ...poem,
+  //     adj1: event.target.value,
+  //   });
+  // };
+
+  // const onNounChange = (event) => {    
+  //   setPoem({
+  //     ...poem,
+  //     noun1: event.target.value,
+  //   });
+  // };
+
+  // const onAdverbChange = (event) => {    
+  //   setPoem({
+  //     ...poem,
+  //     adv: event.target.value,
+  //   });
+  // };
+
+  // const onVerbChange = (event) => {    
+  //   setPoem({
+  //     ...poem,
+  //     verb: event.target.value,
+  //   });
+  // };
+
+  // const onAdjective2Change = (event) => {    
+  //   setPoem({
+  //     ...poem,
+  //     adj2: event.target.value,
+  //   });
+  // };
+
+  // const onNoun2Change = (event) => {    
+  //   setPoem({
+  //     ...poem,
+  //     noun2: event.target.value,
+  //   });
+  // };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -74,19 +134,18 @@ const PlayerSubmissionForm = (props) => {
     console.log("submitting form...");
 
     
-    if (poem.adjective !== '' && poem.nount !== '' && poem.adverb !== '' && poem.verb !== '' && poem.adjective2 !== '' && poem.noun2 !== '') {
+    if (poem.adj1 !== '' && poem.noun1 !== '' && poem.adv !== '' && poem.verb !== '' && poem.adj2 !== '' && poem.noun2 !== '') {
 
       // we need to display new info
       props.updatePoemCallback(poem);
 
       // TODO => not working?
       setPoem({
-        id: poem.id + 1,
-        adjective: '',
-        noun: '',
-        adverb: '',
+        adj1: '',
+        noun1: '',
+        adv: '',
         verb: '',
-        adjective2: '',
+        adj2: '',
         noun2: '',
       });
     };
@@ -108,29 +167,29 @@ const PlayerSubmissionForm = (props) => {
 
           {
             // Put your form inputs here... We've put in one below as an example
-            
+            submissionFormComponents
           }
-          The
+          {/* The
           <input 
             onChange={onAdjectiveChange}
-            value={poem.adjective}
+            value={poem.adj1}
             placeholder="adjective" 
             type="text" 
-            className={poem.adjective ? '' : 'PlayerSubmissionFormt__input--invalid' }
+            className={poem.adj1 ? '' : 'PlayerSubmissionFormt__input--invalid' }
           />
           <input 
             onChange={onNounChange}
-            value={poem.noun}
+            value={poem.noun1}
             placeholder="noun" 
             type="text" 
-            className={poem.noun ? '' : 'PlayerSubmissionFormt__input--invalid' }
+            className={poem.noun1 ? '' : 'PlayerSubmissionFormt__input--invalid' }
           />
           <input 
             onChange={onAdverbChange}
-            value={poem.adverb}
+            value={poem.adv}
             placeholder="adverb" 
             type="text" 
-            className={poem.adverb ? '' : 'PlayerSubmissionFormt__input--invalid' }
+            className={poem.adv ? '' : 'PlayerSubmissionFormt__input--invalid' }
           />
           <input 
             onChange={onVerbChange}
@@ -142,10 +201,10 @@ const PlayerSubmissionForm = (props) => {
           the
           <input 
             onChange={onAdjective2Change}
-            value={poem.adjective2}
+            value={poem.adj2}
             placeholder="adjective" 
             type="text" 
-            className={poem.adjective2 ? '' : 'PlayerSubmissionFormt__input--invalid' }
+            className={poem.adj2 ? '' : 'PlayerSubmissionFormt__input--invalid' }
           />
           <input 
             onChange={onNoun2Change}
@@ -154,7 +213,7 @@ const PlayerSubmissionForm = (props) => {
             type="text" 
             className={poem.noun2 ? '' : 'PlayerSubmissionFormt__input--invalid' }
           />
-          .
+          . */}
         </div>
 
         <div className="PlayerSubmissionForm__submit">

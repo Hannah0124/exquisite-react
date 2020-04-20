@@ -53,8 +53,6 @@ const Game = () => {
     });
   }
 
-  
-
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
