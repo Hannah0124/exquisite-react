@@ -15,34 +15,34 @@ const Game = () => {
 
   const lastId = poems.length;
 
+
   const updatePoem = (poem) => {
     const newPoems = [...poems]; 
 
     newPoems.push(poem);
-    setCurrentPlayer(currentPlayer + 1);
 
     // Change status 
-    setPoems(newPoems);
+    setCurrentPlayer(currentPlayer + 1);
+    setPoems(newPoems); 
   };
 
-  // test
-  console.log('update poem?', poems);
 
   const getRecentSubmission = () => {
     const recentPoem = poems[lastId - 1];
     if (recentPoem) {
-      return `The ${recentPoem.adjective} ${recentPoem.noun} ${recentPoem.adverb} ${recentPoem.verb} the ${recentPoem.adjective2} ${recentPoem.noun2}`;
+      return `The ${recentPoem.adj1} ${recentPoem.noun1} ${recentPoem.adv} ${recentPoem.verb} the ${recentPoem.adj2} ${recentPoem.noun2}`;
     };
   };
 
+  
   const onSubmitLineClick = () => {
     console.log('you just clicked submit line!')
     setReveal({
       ...reveal, 
       recentPoem: true,
-      // submissionForm: true,
     });
   };
+
 
   const onRevealPoemClick = () => {
     console.log('you just clicked reveal the poem button!');
@@ -62,6 +62,7 @@ const Game = () => {
     }
   }).join(" ");
 
+
   return (
     <div className="Game">
       <h2>Game</h2>
@@ -77,7 +78,6 @@ const Game = () => {
       <RecentSubmission 
         getRecentPoemCallback={getRecentSubmission}
         reveal={reveal}
-        // className={reveal.recentPoem ? "show" : "hidden"}
       />
 
       <PlayerSubmissionForm 

@@ -36,7 +36,11 @@ const FinalPoem = (props) => {
 FinalPoem.propTypes = {
   poems: PropTypes.array.isRequired,
   onRevealPoemClickCallback: PropTypes.func.isRequired,
-  reveal: PropTypes.object.isRequired,
+  reveal: PropTypes.shape({
+    recentPoem: PropTypes.bool.isRequired,
+    finalPoem: PropTypes.bool.isRequired,
+    submissionForm: PropTypes.bool.isRequired,
+  }),
 };
 
 export default FinalPoem;

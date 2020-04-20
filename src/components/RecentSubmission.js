@@ -18,7 +18,11 @@ const RecentSubmission = ({getRecentPoemCallback, reveal}) => {
 
 RecentSubmission.propTypes = {
   getRecentPoemCallback: PropTypes.func.isRequired,
-  reveal: PropTypes.object.isRequired,
+  reveal: PropTypes.shape({
+    recentPoem: PropTypes.bool.isRequired,
+    finalPoem: PropTypes.bool.isRequired,
+    submissionForm: PropTypes.bool.isRequired,
+  }),
 };
 
 export default RecentSubmission;
