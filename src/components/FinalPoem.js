@@ -4,27 +4,30 @@ import './FinalPoem.css';
 
 const FinalPoem = (props) => {
 
-  console.log(props.poems)
+  console.log('final poem', props.poems)
 
-  const FinalPoemComponents = props.poems.map(poem => {
+  const FinalPoemComponents = props.poems.map((poem, i) => {
     return (
-      <> 
-        <p>
-          The {poem.adjective} {poem.noun} {poem.adverb} {poem.verb} the {poem.adjective1} {poem.noun1}
-        </p>
-      </>
-    )
+      <p key={i}>
+        The {poem.adjective} {poem.noun} {poem.adverb} {poem.verb} the {poem.adjective1} {poem.noun1}
+      </p>
+    );
   });
 
   return (
     <div className="FinalPoem">
-      <section className="FinalPoem__poem">
+      <section className={props.reveal.finalPoem ? "FinalPoem__poem" : "FinalPoem__poem hidden"}>
         <h3>Final Poem</h3>
         {FinalPoemComponents}
       </section>
 
       <div className="FinalPoem__reveal-btn-container">
-        <input type="button" value="We are finished: Reveal the Poem" className="FinalPoem__reveal-btn" />
+        <input 
+          type="button" 
+          value="We are finished: Reveal the Poem" 
+          className={props.reveal.finalPoem ? "FinalPoem__reveal-btn hidden" : "FinalPoem__reveal-btn"}
+          onClick={props.onRevealPoemClickCallback}
+        />
       </div>
     </div>
   );
@@ -32,6 +35,8 @@ const FinalPoem = (props) => {
 
 FinalPoem.propTypes = {
   poems: PropTypes.array.isRequired,
+  onRevealPoemClickCallback: PropTypes.func.isRequired,
+  reveal: PropTypes.object.isRequired,
 };
 
 export default FinalPoem;

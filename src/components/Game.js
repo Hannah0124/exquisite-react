@@ -7,6 +7,13 @@ import RecentSubmission from './RecentSubmission';
 const Game = () => {
   const [poems, setPoems] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [reveal, setReveal] = useState({
+    recentPoem: false,
+    finalPoem: false,
+    submissionForm: true,
+  });
+
+  const lastId = poems.length;
 
   const updatePoem = (poem) => {
     const newPoems = [...poems]; 
@@ -20,6 +27,34 @@ const Game = () => {
 
   // test
   console.log('update poem?', poems);
+
+  const getRecentSubmission = () => {
+    const recentPoem = poems[lastId - 1];
+    if (recentPoem) {
+      return `The ${recentPoem.adjective} ${recentPoem.noun} ${recentPoem.adverb} ${recentPoem.verb} the ${recentPoem.adjective2} ${recentPoem.noun2}`;
+    };
+  };
+
+  const onSubmitLineClick = () => {
+    console.log('you just clicked submit line!')
+    setReveal({
+      ...reveal, 
+      recentPoem: true,
+      // submissionForm: true,
+    });
+  };
+
+  const onRevealPoemClick = () => {
+    console.log('you just clicked reveal the poem button!');
+    setReveal({
+      recentPoem: false,
+      finalPoem: true,
+      submissionForm: false,
+    });
+  }
+
+  
+
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -41,16 +76,24 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission />
+      <RecentSubmission 
+        getRecentPoemCallback={getRecentSubmission}
+        reveal={reveal}
+        // className={reveal.recentPoem ? "show" : "hidden"}
+      />
 
       <PlayerSubmissionForm 
         fields={FIELDS}
         currentPlayer={currentPlayer}
         updatePoemCallback={updatePoem}
+        onSubmitLineClickCallback={onSubmitLineClick}
+        reveal={reveal}
       />
 
       <FinalPoem 
         poems={poems}
+        onRevealPoemClickCallback={onRevealPoemClick}
+        reveal={reveal}
       />
 
     </div>
