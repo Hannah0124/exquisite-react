@@ -10,7 +10,7 @@ const FinalPoem = (props) => {
   const FinalPoemComponents = props.poems.map((poem, i) => {
     return (
       <p key={i}>
-        The {poem.adjective} {poem.noun} {poem.adverb} {poem.verb} the {poem.adjective1} {poem.noun1}
+        The {poem.adj1} {poem.noun1} {poem.adv} {poem.verb} the {poem.adj2} {poem.noun2}
       </p>
     );
   });

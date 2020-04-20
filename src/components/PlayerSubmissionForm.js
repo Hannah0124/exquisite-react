@@ -27,28 +27,6 @@ const PlayerSubmissionForm = (props) => {
   };
 
 
-  // Wave 1 & optional
-  const submissionFormComponents = props.fields.map((field, i) => {
-    const userInput = poem[field.key];
-
-    if (field.key) {
-      return (
-        <input 
-          key={i}
-          onChange={onFieldChange}
-          name={field.key}
-          value={userInput} // e.g. user input => "green"
-          placeholder={field.placeholder} // e.g. "adjective" 
-          type="text" 
-          className={userInput ? '' : 'PlayerSubmissionFormt__input--invalid' } // wave 3
-        />
-      );
-    } else {
-      return field;
-    };
-  });
-
-
   // Wave 1
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -70,6 +48,28 @@ const PlayerSubmissionForm = (props) => {
       });
     };
   };
+
+  
+  // Wave 1 & optional
+  const submissionFormComponents = props.fields.map((field, i) => {
+    const userInput = poem[field.key];
+
+    if (field.key) {
+      return (
+        <input 
+          key={i}
+          onChange={onFieldChange}
+          name={field.key}
+          value={userInput} // e.g. user input => "green"
+          placeholder={field.placeholder} // e.g. "adjective" 
+          type="text" 
+          className={userInput ? '' : 'PlayerSubmissionFormt__input--invalid' } // wave 3
+        />
+      );
+    } else {
+      return field;
+    };
+  });
 
 
   return (
