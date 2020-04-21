@@ -14,13 +14,13 @@ const PlayerSubmissionForm = (props) => {
   });
 
 
+  // Question: how to validate "happy12"
   const userInputValid = userInput => {
-    const userInputString = (userInput).toString();
-    if (userInputString.match(/[a-zA-Z+]/) || userInputString === "") {
-      return true;
+    if (userInput.match(/[^a-zA-Z]/g)) {
+      return false; 
     } else {
-      return false;
-    };
+      return true;
+    }
   };
 
   // field validation reference: https://www.freecodecamp.org/news/how-to-use-reacts-controlled-inputs-for-instant-form-field-validation-b1c7b033527e/

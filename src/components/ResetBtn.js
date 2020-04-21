@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ResetBtn.css';
 
-const ResetBtn = (props) => {
+const ResetBtn = ({reveal, onResetBtnClickCallback}) => {
   return (
     <div className="ResetBtn__reset-btn-container">
       <input 
         type="button" 
         value="Reset Game" 
-        className={props.reveal.reset ? "ResetBtn__reset-btn" : "ResetBtn__reset-btn hidden"}
-        onClick={props.onResetBtnClickCallback}
+        className={reveal.reset ? "ResetBtn__reset-btn" : "ResetBtn__reset-btn hidden"}
+        onClick={onResetBtnClickCallback}
       />
     </div>
   );
