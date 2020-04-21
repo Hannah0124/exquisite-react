@@ -5,7 +5,6 @@
 
 .FinalPoem__reveal-btn {
   flex: 0.8;
-
   padding: 1rem;
   border: 2px black solid;
   box-shadow: 5px 10px black;
@@ -14,6 +13,7 @@
   margin-right: auto; 
   width: 500px;
   position: relative;
+  cursor: pointer;
 }
 
 .FinalPoem__reveal-btn:hover {

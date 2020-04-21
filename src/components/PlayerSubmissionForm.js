@@ -49,7 +49,7 @@ const PlayerSubmissionForm = (props) => {
     };
   };
 
-  
+
   // Wave 1 & optional
   const submissionFormComponents = props.fields.map((field, i) => {
     const userInput = poem[field.key];
@@ -112,6 +112,7 @@ PlayerSubmissionForm.propTypes = {
     recentPoem: PropTypes.bool.isRequired,
     finalPoem: PropTypes.bool.isRequired,
     submissionForm: PropTypes.bool.isRequired,
+    reset: PropTypes.bool.isRequired,
   }),
 };
 
