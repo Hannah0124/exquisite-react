@@ -1,0 +1,22 @@
+.ResetBtn__reset-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.ResetBtn__reset-btn {
+  margin-top: 30px;
+  flex: 0.8;
+  padding: 1rem;
+  border: 2px black solid;
+  box-shadow: 5px 10px black;
+  transition: 0.25s;
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 500px;
+  position: relative;
+  cursor: pointer;
+}
+
+.ResetBtn__reset-btn:hover {
+  background-color: #f2ec3a;
+}

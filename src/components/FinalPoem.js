@@ -41,6 +41,7 @@ FinalPoem.propTypes = {
     recentPoem: PropTypes.bool.isRequired,
     finalPoem: PropTypes.bool.isRequired,
     submissionForm: PropTypes.bool.isRequired,
+    reset: PropTypes.bool.isRequired,
   }),
 };
 

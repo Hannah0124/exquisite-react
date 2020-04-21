@@ -3,6 +3,7 @@ import './Game.css';
 import PlayerSubmissionForm from './PlayerSubmissionForm';
 import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
+import ResetBtn from './ResetBtn';
 
 const Game = () => {
   const [poems, setPoems] = useState([]);
@@ -11,6 +12,7 @@ const Game = () => {
     recentPoem: false,
     finalPoem: false,
     submissionForm: true,
+    reset: false,
   });
 
   const lastId = poems.length;
@@ -54,7 +56,23 @@ const Game = () => {
       recentPoem: false,
       finalPoem: true,
       submissionForm: false,
+      reset: true,
     });
+  }
+
+  
+  const onResetBtnClick = () => {
+    console.log('clicked on reset btn');
+
+    setReveal({
+      recentPoem: false,
+      finalPoem: false,
+      submissionForm: true,
+      reset: false,
+    });
+
+    setPoems([]);
+    setCurrentPlayer(1);
   }
 
 
@@ -73,11 +91,13 @@ const Game = () => {
 
       <p>Each player should take turns filling out and submitting the form below. Each turn should be done individually and <em>in secret!</em> Take inspiration from the revealed recent submission. When all players are finished, click the final button on the bottom to reveal the entire poem.</p>
 
+      <section className="example-container">
       <p>Please follow the following format for your poetry submission:</p>
 
       <p className="Game__format-example">
         { exampleFormat }
       </p>
+      </section>
 
       <RecentSubmission 
         getRecentPoemCallback={getRecentSubmission}
@@ -95,6 +115,11 @@ const Game = () => {
       <FinalPoem 
         poems={poems}
         onRevealPoemClickCallback={onRevealPoemClick}
+        reveal={reveal}
+      />
+
+      <ResetBtn 
+        onResetBtnClickCallback={onResetBtnClick}
         reveal={reveal}
       />
 
