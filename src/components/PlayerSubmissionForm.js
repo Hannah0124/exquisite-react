@@ -14,6 +14,27 @@ const PlayerSubmissionForm = (props) => {
   });
 
 
+  const userInputValid = userInput => {
+    const userInputString = (userInput).toString();
+    if (userInputString.match(/[a-zA-Z+]/) || userInputString === "") {
+      return true;
+    } else {
+      return false;
+    };
+  };
+
+  // field validation reference: https://www.freecodecamp.org/news/how-to-use-reacts-controlled-inputs-for-instant-form-field-validation-b1c7b033527e/
+  const isValid = () => {
+    for (let key in poem) {
+      if (!userInputValid(poem[key])) {
+        return false;
+      }
+    };
+    return true;
+  };
+
+
+
   // Wave 1 & optional (a Dynamically-Generated Form)
   const onFieldChange = (event) => {
     console.log("changing poem..", event.target.value)
@@ -63,7 +84,7 @@ const PlayerSubmissionForm = (props) => {
           value={userInput} // e.g. user input => "green"
           placeholder={field.placeholder} // e.g. "adjective" 
           type="text" 
-          className={userInput ? '' : 'PlayerSubmissionFormt__input--invalid' } // wave 3
+          className={userInputValid(userInput) ? 'PlayerSubmissionFormt__input--valid' : 'PlayerSubmissionFormt__input--invalid' } // wave 3
         />
       );
     } else {
@@ -92,12 +113,19 @@ const PlayerSubmissionForm = (props) => {
 
         <div className="PlayerSubmissionForm__submit">
           <input 
+            disabled={isValid() ? false : true}  
             type="submit" 
             value="Submit Line" 
-            className="PlayerSubmissionForm__submit-btn"
+            className={isValid() ? "PlayerSubmissionForm__submit-btn" : "PlayerSubmissionForm__submit-btn--invalid"}
             onClick={props.onSubmitLineClickCallback} 
           />
         </div>
+
+        <p 
+          className={isValid() ? "hidden" : "PlayerSubmissionForm__p--invalid-message"}>
+            <span role="img" aria-label="warning">⚠️ </span>
+            Invalid input❗️
+        </p>
       </form>
     </div>
   );

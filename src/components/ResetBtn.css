@@ -3,6 +3,8 @@
   justify-content: center;
 }
 
+
+/* gradient color referene: https://codepen.io/JavaScriptJunkie/pen/pPRooV */
 .ResetBtn__reset-btn {
   margin-top: 30px;
   flex: 0.3;
@@ -13,14 +15,12 @@
   width: 500px;
   position: relative;
   cursor: pointer;
-
   text-transform: uppercase;
   border-radius: 10px;
   color: #fff;
   font-weight: bold;
   font-size: 16px;
   box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
-
   background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
   box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
 }
