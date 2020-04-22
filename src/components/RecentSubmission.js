@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './RecentSubmission.css';
 
-const RecentSubmission = ({getRecentPoemCallback, reveal}) => {
+const RecentSubmission = ({reveal, ...props}) => {
 
-  const recentSubmissionComponent = getRecentPoemCallback();
+  const recentSubmissionComponent = props.getRecentPoemCallback();
 
   return (
     <div className={reveal.recentPoem ? "RecentSubmission" : "RecentSubmission hidden"}>

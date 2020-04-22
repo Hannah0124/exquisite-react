@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './FinalPoem.css';
 
-const FinalPoem = (props) => {
+const FinalPoem = ({poems, reveal, ...props}) => {
 
-  console.log('final poem', props.poems)
+  console.log('final poem', poems)
 
   // Wave 2
-  const FinalPoemComponents = props.poems.map((poem, i) => {
+  const FinalPoemComponents = poems.map((poem, i) => {
     return (
       <p key={i}>
         The {poem.adj1} {poem.noun1} {poem.adv} {poem.verb} the {poem.adj2} {poem.noun2}
@@ -17,7 +17,7 @@ const FinalPoem = (props) => {
 
   return (
     <div className="FinalPoem">
-      <section className={props.reveal.finalPoem ? "FinalPoem__poem" : "FinalPoem__poem hidden"}>
+      <section className={reveal.finalPoem ? "FinalPoem__poem" : "FinalPoem__poem hidden"}>
         <h3>Final Poem</h3>
         {FinalPoemComponents}
       </section>
@@ -26,7 +26,7 @@ const FinalPoem = (props) => {
         <input 
           type="button" 
           value="We are finished: Reveal the Poem" 
-          className={props.reveal.finalPoem ? "FinalPoem__reveal-btn hidden" : "FinalPoem__reveal-btn"}
+          className={reveal.finalPoem ? "FinalPoem__reveal-btn hidden" : "FinalPoem__reveal-btn"}
           onClick={props.onRevealPoemClickCallback}
         />
       </div>

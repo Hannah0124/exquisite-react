@@ -77,9 +77,9 @@ const PlayerSubmissionForm = (props) => {
       console.log("you cannot enter empty input!!!")
 
       // After 3 seconds, make sure that a user can try to enter new input! (The submit line button will be able again)
-       setTimeout(() => {
+      setTimeout(() => {
         setValid(true);
-       }, 3000);
+      }, 3000);
     };
   };
 
