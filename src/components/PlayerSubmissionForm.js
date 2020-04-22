@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './PlayerSubmissionForm.css';
 
+const EMPTY_POEM = {
+  adj1: '',
+  noun1: '',
+  adv: '',
+  verb: '',
+  adj2: '',
+  noun2: '',
+};
+
 const PlayerSubmissionForm = (props) => {
 
-  const [poem, setPoem] = useState({
-    adj1: '',
-    noun1: '',
-    adv: '',
-    verb: '',
-    adj2: '',
-    noun2: '',
-  });
+  const [poem, setPoem] = useState(EMPTY_POEM);
+
+  const [valid, setValid] = useState(true);
 
 
-  // Question: how to validate "happy12"
+  // helper function for detecting if individual userinput is valid or not
   const userInputValid = userInput => {
     if (userInput.match(/[^a-zA-Z]/g)) {
       return false; 
@@ -24,10 +28,11 @@ const PlayerSubmissionForm = (props) => {
   };
 
   // field validation reference: https://www.freecodecamp.org/news/how-to-use-reacts-controlled-inputs-for-instant-form-field-validation-b1c7b033527e/
+  // Helper function for "onFormSubmit" function
   const isValid = () => {
     for (let key in poem) {
-      if (!userInputValid(poem[key])) {
-        return false;
+      if (!userInputValid(poem[key]) || poem[key] === "") {
+        return false; 
       }
     };
     return true;
@@ -54,24 +59,32 @@ const PlayerSubmissionForm = (props) => {
 
     console.log("submitting form...");
 
-    
-    if (poem.adj1 !== '' && poem.noun1 !== '' && poem.adv !== '' && poem.verb !== '' && poem.adj2 !== '' && poem.noun2 !== '') {
+
+    if (isValid()) {
+
+    // test
+    // if (poem.adj1 !== '' && poem.noun1 !== '' && poem.adv !== '' && poem.verb !== '' && poem.adj2 !== '' && poem.noun2 !== '') {
 
       props.updatePoemCallback(poem); // update 'poem' in 'poems' state (App.js)
 
-      setPoem({
-        adj1: '',
-        noun1: '',
-        adv: '',
-        verb: '',
-        adj2: '',
-        noun2: '',
-      });
+      setPoem(EMPTY_POEM);
+
+      setValid(true);
+    } 
+    
+    else {
+      setValid(false);
+      console.log("you cannot enter empty input!!!")
+
+      // After 3 seconds, make sure that a user can try to enter new input! (The submit line button will be able again)
+       setTimeout(() => {
+        setValid(true);
+       }, 3000);
     };
   };
 
 
-  // Wave 1 & optional
+  // Wave 1 & optional (a Dynamically-Generated Form)
   const submissionFormComponents = props.fields.map((field, i) => {
     const userInput = poem[field.key];
 
@@ -113,16 +126,16 @@ const PlayerSubmissionForm = (props) => {
 
         <div className="PlayerSubmissionForm__submit">
           <input 
-            disabled={isValid() ? false : true}  
+            disabled={valid ? false : true}  
             type="submit" 
             value="Submit Line" 
-            className={isValid() ? "PlayerSubmissionForm__submit-btn" : "PlayerSubmissionForm__submit-btn--invalid"}
+            className={valid ? "PlayerSubmissionForm__submit-btn" : "PlayerSubmissionForm__submit-btn--invalid"}
             onClick={props.onSubmitLineClickCallback} 
           />
         </div>
 
         <p 
-          className={isValid() ? "hidden" : "PlayerSubmissionForm__p--invalid-message"}>
+          className={valid ? "hidden" : "PlayerSubmissionForm__p--invalid-message"}>
             <span role="img" aria-label="warning">⚠️ </span>
             Invalid input❗️
         </p>

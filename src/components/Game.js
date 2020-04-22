@@ -15,7 +15,7 @@ const Game = () => {
     reset: false,
   });
 
-  const lastId = poems.length;
+  const lastIdx = poems.length - 1;
 
 
   // Wave 1
@@ -32,7 +32,7 @@ const Game = () => {
 
   // Wave 3
   const getRecentSubmission = () => {
-    const recentPoem = poems[lastId - 1];
+    const recentPoem = poems[lastIdx];
     if (recentPoem) {
       return `The ${recentPoem.adj1} ${recentPoem.noun1} ${recentPoem.adv} ${recentPoem.verb} the ${recentPoem.adj2} ${recentPoem.noun2}`;
     };
