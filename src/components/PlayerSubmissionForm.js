@@ -18,17 +18,20 @@ const PlayerSubmissionForm = (props) => {
   const [valid, setValid] = useState(true);
 
 
-  // helper function for detecting if individual userinput is valid or not
+  // helper function 
+  // This is for detecting if individual userinput is valid or not
   const userInputValid = userInput => {
-    if (userInput.match(/[^a-zA-Z]/g)) {
+    if (userInput.match(/[^a-zA-Z]/g) || userInput === "") {
       return false; 
     } else {
       return true;
     }
   };
 
+
   // field validation reference: https://www.freecodecamp.org/news/how-to-use-reacts-controlled-inputs-for-instant-form-field-validation-b1c7b033527e/
   // Helper function for "onFormSubmit" function
+  // This is for detecting entire user inputs when clicking a button
   const isValid = () => {
     for (let key in poem) {
       if (!userInputValid(poem[key]) || poem[key] === "") {
@@ -42,12 +45,12 @@ const PlayerSubmissionForm = (props) => {
 
   // Wave 1 & optional (a Dynamically-Generated Form)
   const onFieldChange = (event) => {
-    console.log("changing poem..", event.target.value)
+    const { name, value } = event.target;  
 
-    const { name, value } = event.target;  // destructuring
-    const newPoem = {...poem};  
-
-    newPoem[name] = value; // update key-value pair (e.g. key:adj1, value: plant)
+    const newPoem = {
+      ...poem,
+      [name]: value,  // updating a new key-value pair
+    }
 
     setPoem(newPoem);
   };
@@ -57,15 +60,9 @@ const PlayerSubmissionForm = (props) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    console.log("submitting form...");
-
-
     if (isValid()) {
 
-    // test
-    // if (poem.adj1 !== '' && poem.noun1 !== '' && poem.adv !== '' && poem.verb !== '' && poem.adj2 !== '' && poem.noun2 !== '') {
-
-      props.updatePoemCallback(poem); // update 'poem' in 'poems' state (App.js)
+      props.updatePoemCallback(poem); // updating 'poem' in 'poems' state (App.js)
 
       setPoem(EMPTY_POEM);
 
@@ -74,9 +71,8 @@ const PlayerSubmissionForm = (props) => {
     
     else {
       setValid(false);
-      console.log("you cannot enter empty input!!!")
 
-      // After 3 seconds, make sure that a user can try to enter new input! (The submit line button will be able again)
+      // After 3 seconds, make sure that a user can try to enter a new input! (The submit line button will be accessible again)
       setTimeout(() => {
         setValid(true);
       }, 3000);
@@ -94,8 +90,8 @@ const PlayerSubmissionForm = (props) => {
           key={i}
           onChange={onFieldChange}
           name={field.key}
-          value={userInput} // e.g. user input => "green"
-          placeholder={field.placeholder} // e.g. "adjective" 
+          value={userInput} 
+          placeholder={field.placeholder} 
           type="text" 
           className={userInputValid(userInput) ? 'PlayerSubmissionFormt__input--valid' : 'PlayerSubmissionFormt__input--invalid' } // wave 3
         />

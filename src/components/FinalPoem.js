@@ -4,8 +4,6 @@ import './FinalPoem.css';
 
 const FinalPoem = ({poems, reveal, ...props}) => {
 
-  console.log('final poem', poems)
-
   // Wave 2
   const FinalPoemComponents = poems.map((poem, i) => {
     return (
@@ -17,7 +15,9 @@ const FinalPoem = ({poems, reveal, ...props}) => {
 
   return (
     <div className="FinalPoem">
-      <section className={reveal.finalPoem ? "FinalPoem__poem" : "FinalPoem__poem hidden"}>
+      <section 
+        className={reveal.finalPoem ? "FinalPoem__poem" : "FinalPoem__poem hidden"}
+      >
         <h3>Final Poem</h3>
         {FinalPoemComponents}
       </section>

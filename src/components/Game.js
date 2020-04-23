@@ -15,8 +15,6 @@ const Game = () => {
     reset: false,
   });
 
-  const lastIdx = poems.length - 1;
-
 
   // Wave 1
   const updatePoem = (poem) => {
@@ -32,7 +30,7 @@ const Game = () => {
 
   // Wave 3
   const getRecentSubmission = () => {
-    const recentPoem = poems[lastIdx];
+    const recentPoem = poems[poems.length - 1];
     if (recentPoem) {
       return `The ${recentPoem.adj1} ${recentPoem.noun1} ${recentPoem.adv} ${recentPoem.verb} the ${recentPoem.adj2} ${recentPoem.noun2}`;
     };
@@ -41,7 +39,6 @@ const Game = () => {
 
   // Wave 3 (Conditionally Show, Hide)
   const onSubmitLineClick = () => {
-    console.log('you just clicked submit line!')
     setReveal({
       ...reveal, 
       recentPoem: true,
@@ -51,7 +48,6 @@ const Game = () => {
 
   // Wave 3 (Conditionally Show, Hide)
   const onRevealPoemClick = () => {
-    console.log('you just clicked reveal the poem button!');
     setReveal({
       recentPoem: false,
       finalPoem: true,
@@ -60,10 +56,8 @@ const Game = () => {
     });
   }
 
-  
+  // Added a reset button feature
   const onResetBtnClick = () => {
-    console.log('clicked on reset btn');
-
     setReveal({
       recentPoem: false,
       finalPoem: false,

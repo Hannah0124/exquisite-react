@@ -7,7 +7,9 @@ const RecentSubmission = ({reveal, ...props}) => {
   const recentSubmissionComponent = props.getRecentPoemCallback();
 
   return (
-    <div className={reveal.recentPoem ? "RecentSubmission" : "RecentSubmission hidden"}>
+    <div 
+      className={reveal.recentPoem ? "RecentSubmission" : "RecentSubmission hidden"}
+    >
       <h3>The Most Recent Submission</h3>
       <section className="RecentSubmission__submission">    
         {recentSubmissionComponent}
