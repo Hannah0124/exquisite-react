@@ -56,7 +56,6 @@
   color: red;
 }
 
-/* text inputs are light green when they are blank */
 .PlayerSubmissionFormt__input--valid {
   background-color: rgb(224, 248, 221);
 }

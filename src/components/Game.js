@@ -22,7 +22,6 @@ const Game = () => {
 
     newPoems.push(poem);
 
-    // Change status 
     setCurrentPlayer(currentPlayer + 1);
     setPoems(newPoems); 
   };

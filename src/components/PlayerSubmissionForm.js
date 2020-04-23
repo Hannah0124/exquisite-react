@@ -15,11 +15,11 @@ const PlayerSubmissionForm = (props) => {
 
   const [poem, setPoem] = useState(EMPTY_POEM);
 
-  const [valid, setValid] = useState(true);
+  const [valid, setValid] = useState(true); // for user input
 
 
   // helper function 
-  // This is for detecting if individual userinput is valid or not
+  // This is for detecting if individual user input is valid or not
   const userInputValid = userInput => {
     if (userInput.match(/[^a-zA-Z]/g) || userInput === "") {
       return false; 
